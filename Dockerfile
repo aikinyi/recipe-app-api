@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.8-rc-alpine
 LABEL Aikinyi Limited
 ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /requirements.txt
