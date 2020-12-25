@@ -1,3 +1,31 @@
 from django.contrib import admin
+from django.utils.translation import gettext as _
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from .models import User
 
-# Register your models here.
+
+@admin.register(User)
+class UserAdmin(BaseUserAdmin):
+    """
+    Registering
+    """
+    search_fields = ['id', 'name', 'email']
+    list_display = ['id', 'name', 'email']
+    ordering =  ['id']
+    fieldsets = (
+        (None, {
+            "fields": (
+                'email', 'password'
+            ),
+        }),
+        (_('Personal info'), {'fields': ('name',)}),
+        (_('Permissions'), {'fields': ('is_active','is_staff','is_superuser')}),
+        (_('Important dates'), {'fields': ('last_login',)})
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2'),
+        }),
+    )
+    
