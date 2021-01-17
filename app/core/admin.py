@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User
+from .models import User, Tag
 
 
 @admin.register(User)
@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
     """
     search_fields = ['id', 'name', 'email']
     list_display = ['id', 'name', 'email']
-    ordering =  ['id']
+    ordering = ['id']
     fieldsets = (
         (None, {
             "fields": (
@@ -28,4 +28,8 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
-    
+
+
+@admin.register(Tag)
+class Tag(admin.ModelAdmin):
+    search_fields = ['__all__']
