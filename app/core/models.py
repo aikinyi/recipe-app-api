@@ -41,6 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
 
@@ -57,4 +58,21 @@ class Tag(models.Model):
 
     def __str__(self):
         """String representation for returning name"""
+        return self.name
+
+
+class Ingredient(models.Model):
+    """
+    Model for creating new ingredient
+    """
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        """
+        Returning default value
+        """
         return self.name
