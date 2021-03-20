@@ -30,7 +30,7 @@ class TagViewSet(viewsets.GenericViewSet,
         serializer.save(user=self.request.user)
 
 
-class IngredientViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+class IngredientViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
     """
     Creating IngredientViewSet
     """
@@ -45,3 +45,10 @@ class IngredientViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
         on user credentials
         """
         return self.queryset.filter(user=self.request.user).order_by('-name')
+
+    def perform_create(self, serializer):
+        """
+        Creating new Ingredient
+        """
+        serializer.save(user=self.request.user)
+
